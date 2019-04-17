@@ -28,7 +28,3 @@
     
   ### 참고 이미지 
     ![correlation](/img/correlation relation.png)
-    
-    ![DHT22 Pin](/img/dht22.png)
-  
-    ![GPIO Pin Map](/img/GPIO.png)
