@@ -27,8 +27,8 @@
     - 라즈베리파이에 대한 초기설정과 각종 언어 및 기술의 설치 방법등이 적혀있습니다.
     
   ### 참고 이미지 
-    ![correlation](img/correlation relation.png)
+    ![correlation](/img/correlation relation.png)
     
-    ![DHT22 Pin](img/dht22.png)
+    ![DHT22 Pin](/img/dht22.png)
   
-    ![GPIO Pin Map](img/GPIO.png)
+    ![GPIO Pin Map](/img/GPIO.png)
