@@ -28,7 +28,7 @@
     
   ### 참고 이미지 
   
-   ![correlation](/img/correlation relation.png)
+   ![correlation](/img/correlation_relation.png)
     
    ![DHT22 Pin](/img/dht22.png)
   
