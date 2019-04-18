@@ -11,4 +11,4 @@
   온도 데이터의 끝에 약간의 noise 값을 추가하여 정상적으로 계산되게 하였습니다.
   
 ### 참고 이미지
-  ![Correlation data](/scrape_Data/img/Correlation_data.jpg)
+  ![Correlation data](/scrape_Data/img/Correlation_data.png)
