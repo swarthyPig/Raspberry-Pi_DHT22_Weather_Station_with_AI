@@ -11,5 +11,5 @@
   * client_CR.html에서 평가를 완료하면 페이지가 이동이되며 선택한 쾌적도 레벨을 볼 수 있게 하였습니다.
 
 
-### 참고 이미지
-  ![mongoDB_CR]('./express/img/mongoDB_CR.PNG')
+### 참고 이미지 
+  ![mongoDB_CR]('/express/img/mongoDB_CR.PNG')
