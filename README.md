@@ -14,17 +14,17 @@
   * 도구
     - Raspberry Pi3 B+, DHT22
   * Front-End
-    - HTML5, javascript, plotly.js,
+    - HTML5, javascript, plotly.js, gauge.js
   * Back-End
-    - Python3(Flask), node.js, express
+    - Python3(Flask), node.js, express, socket.io
   * Module and Library
-    -  Python3(DHT22 library), mongoose, 
+    -  Python3(DHT22 library), mongoose, cheerio, cors
   * DB
     - MongoDB
   
 ### 각 폴더의 간단한 설명
   * data mining folder
-    - python 라이브러리인 pandas를 사용하여 데이터를 분석하였습니다.
+     - python 라이브러리인 pandas를 사용하여 데이터를 분석하였습니다.
     
   * express folder
     - express-generator를 사용하여 진행하였습니다.
