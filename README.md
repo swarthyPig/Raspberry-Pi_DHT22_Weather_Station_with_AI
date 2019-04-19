@@ -8,7 +8,19 @@
   * flask(5000), socket.io(3000), express(3030) 총 3개의 서버를 사용하였고 동시에 running됩니다.
   * 데이터를 주고받기위해 CORS 설정을 해주어 문제없이 작동 되게 하였습니다.
   
-### 
+### 사용한 도구, 언어 및 기술
+  * Editor
+    - Brackets
+  * 도구
+    - Raspberry Pi3 B+, DHT22
+  * Front-End
+    - HTML5, javascript, plotly.js,
+  * Back-End
+    - Python3(Flask), node.js, express
+  * Module and Library
+    -  Python3(DHT22 library), mongoose, 
+  * DB
+    - MongoDB
   
 ### 각 폴더의 간단한 설명
   * data mining folder
