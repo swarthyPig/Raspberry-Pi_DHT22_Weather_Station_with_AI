@@ -10,15 +10,17 @@
   
 ### 사용한 도구, 언어 및 기술
   * Editor
-    - Brackets
+    - Brackets, Google Colab
   * 도구
-    - Raspberry Pi3 B+, DHT22
+    - Raspberry Pi 3 B+, DHT22
   * Front-End
     - HTML5, javascript, plotly.js, gauge.js
   * Back-End
     - Python3(Flask), node.js, express, socket.io
   * Module and Library
     -  Python3(DHT22 library), mongoose, cheerio, cors
+  * Data mining
+    - Python(Pandas)
   * DB
     - MongoDB
   
