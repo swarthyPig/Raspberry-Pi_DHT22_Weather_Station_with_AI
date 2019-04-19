@@ -25,8 +25,8 @@
  ![plotly_c](/express/img/correlation.png)
  
 ### client_DB_c.html
-   ![client_DB_c](/express/img/MongoDB_Client_Data.png)
+ ![client_DB_c](/express/img/MongoDB_Client_Data.png)
  
 ### client_CR.html
-   ![client_CR](/express/img/client_CR.png)
-   ![client_CR_result](/express/img/client_result_page.png)
+ ![client_CR](/express/img/client_CR.png)
+ ![client_CR_result](/express/img/client_result_page.png)
