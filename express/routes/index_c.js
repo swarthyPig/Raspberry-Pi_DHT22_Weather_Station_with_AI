@@ -3,14 +3,21 @@ var router = express.Router();
 
 // MongoDB
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;  // Schema object
+var Schema = mongoose.Schema;
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/th'); // DB name
-var db = mongoose.connection;    
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback() {
-        console.log("mongo db connection OK.");
-});
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/iot',{
+    keepAlive: 300000,
+    connectTimeoutMS: 30000,
+}, (err) => {
+  if (err) {
+      console.log('===>  Error connecting to th');
+      console.log('Reason: th');
+  } else {
+      console.log('===>  Succeeded in connecting to th');
+  }
+}); // DB name
+
 // Schema
 var thSchema = new Schema({
     date : String,
@@ -18,22 +25,35 @@ var thSchema = new Schema({
     humidity : String
 });
 
-var TH = mongoose.model("TH", thSchema);  // sensor data model
+var TH = mongoose.model("th", thSchema);  // sensor data model
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async (req, res, next) => {
+    
     res.render('index',{ title : 'RaspberryPi sensor'});
 });
-router.get('/th', function (req, res) {
-    TH.find(function(err, data) {
-        res.json(data);
-    });
+
+router.get('/th', async (req, res) => {
+    
+    try {
+        let th = await TH.find({}).exec();
+        res.json(th);
+        
+    } catch(err){
+        console.log(err);
+    }
 });
+
 // find data by id
-router.get('/th/:id', function (req, res) {
-    TH.findById(req.params.id, function(err, data) {
-        res.json(data);
-    });
+router.get('/th/:id', async (req, res) => {
+    
+    try {
+        let th = await TH.findById(req.params.id).exec();
+        res.json(th);
+    } catch(err){
+        console.log(err);
+    }
+    
 });
 
 module.exports = router;

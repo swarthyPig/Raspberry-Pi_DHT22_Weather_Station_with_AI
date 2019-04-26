@@ -5,12 +5,18 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/cr'); // DB name
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback() {
-    console.log("mongo db connection OK.");
-});
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/iot',{
+    keepAlive: 300000,
+    connectTimeoutMS: 30000,
+}, (err) => {
+  if (err) {
+      console.log('===>  Error connecting to cr');
+      console.log('Reason: th');
+  } else {
+      console.log('===>  Succeeded in connecting to cr');
+  }
+}); // DB name
 // Schema
 var crSchema = new Schema({
     date: String,
@@ -28,7 +34,7 @@ crSchema.methods.info = function () {
     console.log("crInfo: " + crInfo);
 };
 
-var CR = mongoose.model("CR", crSchema); // sensor data model  
+var CR = mongoose.model("cr", crSchema); // sensor data model  
 
 function getDateString() {
 
@@ -38,21 +44,18 @@ function getDateString() {
     return datestr;
 }
 
-router.get('/', function(req,res){
-    
-    var dateStr = getDateString();
-    var cr_value= req.query.CR;
-    var gender_value = req.query.gender;
-    var age_value = req.query.age;
+router.get('/', async (req, res) => {
 
-    var cr = new CR({ date: dateStr, cr: cr_value, gender:gender_value, age: age_value });
+    var cr = new CR({ date: getDateString(), cr: req.query.CR, gender:req.query.gender, age: req.query.age });
     // save iot data (document) to MongoDB
-    cr.save(function (err, cr) {
-        if (err) return handleEvent(err);
-        cr.info(); // Display the information of iot data  on console.
-    }); 
+    try {
+        let newCR = await cr.save();
+      
+    } catch(err) {
+        console.error(err);
+    }
     
-    res.send("You chose CR value is = " + cr_value + " Thank you^^ ");
+    res.send("You chose CR value is = " + req.query.CR + " Thank you^^ ");
 });
 
 module.exports = router;
