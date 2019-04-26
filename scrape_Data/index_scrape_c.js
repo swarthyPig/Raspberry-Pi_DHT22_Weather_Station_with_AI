@@ -8,12 +8,19 @@ var io = require('socket.io').listen(3000, function (req, res) {
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/th'); // DB name
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback () {
-    console.log("mongo db connection OK.");
-});
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/iot',{
+    keepAlive: 300000,
+    connectTimeoutMS: 30000,
+}, (err) => {
+  if (err) {
+      console.log('===>  Error connecting to th');
+      console.log('Reason: th');
+  } else {
+      console.log('===>  Succeeded in connecting to th');
+  }
+}); // DB name
+
 // Schema
 var thSchema = new Schema({
     date : String,
@@ -25,7 +32,7 @@ thSchema.methods.info = function () {
     var thInfo = this.date
     ? "date: " + this.date +", Temp: " + this.temperature 
     + ", Humi: " + this.humidity 
-    : "I don't have a date"
+    : "I don't have a date";
     console.log("thInfo: " + thInfo);
 };
 
@@ -37,7 +44,7 @@ var CelsiusData = '';
 var HumidityData = '';
 var Pearson_correlation = '0';
 
-var TH = mongoose.model("TH", thSchema);  // sensor data model
+var TH = mongoose.model("th", thSchema);  // sensor data model
 
 var url = 'http://127.0.0.1:5000/'; // Flask address
 
@@ -136,7 +143,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('disconnect', function () {});
 });
 
-setInterval(function () {
+setInterval( async (req, res) =>  {
     dateStr = getDateString();
     CelsiusData = getCelsius();
     HumidityData = getHumidity();
@@ -160,10 +167,13 @@ setInterval(function () {
     
     var th = new TH({date:dateStr, temperature:CelsiusData, humidity:HumidityData});
         // save iot data (document) to MongoDB
-        th.save(function(err, th) {
-            if(err) return handleEvent(err);
-            th.info();  // Display the information of iot data  on console.
-        });
+    try {
+        let newTH = await th.save();
+        
+    }catch(err) {
+        console.log(err);
+    }
+    
     io.sockets.emit('message', dht22data);
     //console.log("Raspberry Pi," + dht22data);
 }, 3000);
