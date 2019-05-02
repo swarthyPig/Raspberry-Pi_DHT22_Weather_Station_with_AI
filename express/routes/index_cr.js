@@ -50,12 +50,34 @@ router.get('/', async (req, res) => {
     // save iot data (document) to MongoDB
     try {
         let newCR = await cr.save();
-      
+        //console.log(newCR);
     } catch(err) {
         console.error(err);
     }
     
     res.send("You chose CR value is = " + req.query.CR + " Thank you^^ ");
+});
+
+router.get('/cr', async (req, res) => {
+    
+    try {
+        let cr = await CR.find({}).exec();
+        res.json(cr);
+        
+    } catch(err){
+        console.log(err);
+    }
+});
+
+router.get('/cr/:id', async (req, res) => {
+    
+    try {
+        let cr = await CR.findById(req.params.id).exec();
+        res.json(cr);
+    } catch(err){
+        console.log(err);
+    }
+    
 });
 
 module.exports = router;
