@@ -10,7 +10,7 @@
   
 ### 사용한 도구, 언어 및 기술
   * Editor
-    - Brackets, Google Colab
+    - VScode, Google Colab
   * 도구
     - Raspberry Pi 3 B+, DHT22
   * Front-End
