@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#sudo pigpiod 시작하기전 활성화가 필요합니다.
+#sudo pigpiod 시작하기전 GPIO핀 활성화가 필요합니다.
 
 from flask import Flask
 import pigpio
