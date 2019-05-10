@@ -28,7 +28,7 @@ var crSchema = new Schema({
 crSchema.methods.info = function () {
     var crInfo = this.date 
         ? "date: " + this.date + ", CR: " + this.cr 
-        + ", genger: " + this.gender
+        + ", gender: " + this.gender
         + ", age: " + this.age
         : "I don't have a date";
     console.log("crInfo: " + crInfo);
