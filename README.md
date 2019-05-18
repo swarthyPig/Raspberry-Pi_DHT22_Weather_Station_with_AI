@@ -1,6 +1,4 @@
-# Raspberry-Pi_DHT22_Weather_Station_with_correlation and ML
-
-### 기존에 라즈베리파이(3 B+)를 사용하여 진행하였던 프로젝트를 응용한 프로젝트 입니다.
+# Raspberry-Pi_DHT22_Weather_Station_with_AI
   * 최종적으로 AI를 활용하여 특정한 온,습도에서 쾌적함의 정도를 판단하였습니다. 
   
   * 각각의 내용은 폴더로 나뉘어서 설명이 되어있습니다.
