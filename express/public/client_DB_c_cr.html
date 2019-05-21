@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>Raspberry Pi - Client DB Data</title>
+	<!-- Plotly.js -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+	<h1>MongoDB database visualization</h1>
+	<hr>
+	<h2>Time series : Raspberry Pi Real-time Weather Station data</h2>
+
+	<!-- Plotly chart will be drawn inside this DIV -->
+	<div id="myDiv" style="width: 1200px; height:700px"></div>
+	
+	<script>
+		<!-- JAVASCRIPT CODE GOES HERE -->
+
+        var cr_date = [];
+        var cr = [];
+        Plotly.d3.json("http://203.241.246.114:3030/cr_value/cr", function (err, json) {
+
+            var jsonData = eval(JSON.stringify(json));
+
+            for (var i = 0; i < jsonData.length; i++) {
+                cr_date[i] = jsonData[i].date;
+                cr[i] = jsonData[i].cr;
+            }
+        });
+
+		Plotly.d3.json("http://203.241.246.114:3030/th", function (err, json) {
+        //alert(json);
+        alert(JSON.stringify(json)); // It works!!!
+        //alert(JSON.parse(eval(json));
+        if (err) throw err;
+
+        var data_range = 10
+
+        var date = [];
+        var temp = [];
+        var humi = [];
+        var date_avg = [];
+        var temp_avg = [];
+        var humi_avg = [];
+        var correlation = [];
+        var temp_c = [];
+        var humi_c = [];
+        var jsonData = eval(JSON.stringify(json));
+            
+        for (var i = 0; i < jsonData.length; i++) {
+            date[i] = jsonData[i].date;
+            temp[i] = jsonData[i].temperature;
+            humi[i] = jsonData[i].humidity;
+        }
+            
+
+        function getPearsonCorrelation(x, y) {
+
+            var shortestArrayLength = 0;
+
+            if (x.length == y.length) {
+                shortestArrayLength = x.length;
+            } else if (x.length > y.length) {
+                shortestArrayLength = y.length;
+                console.error('x has more items in it, the last ' + (x.length - shortestArrayLength) + ' item(s) will be ignored');
+            } else {
+                shortestArrayLength = x.length;
+                console.error('y has more items in it, the last ' + (y.length - shortestArrayLength) + ' item(s) will be ignored');
+            }
+
+            var xy = [];
+            var x2 = [];
+            var y2 = [];
+
+            for (var i = 0; i < shortestArrayLength; i++) {
+                xy.push(x[i] * y[i]);
+                x2.push(x[i] * x[i]);
+                y2.push(y[i] * y[i]);
+            }
+
+            var sum_x = 0;
+            var sum_y = 0;
+            var sum_xy = 0;
+            var sum_x2 = 0;
+            var sum_y2 = 0;
+
+            for (var j = 0; j < shortestArrayLength; j++) {
+                sum_x += x[j];
+                sum_y += y[j];
+                sum_xy += xy[j];
+                sum_x2 += x2[j];
+                sum_y2 += y2[j];
+            }
+
+            var step1 = (shortestArrayLength * sum_xy) - (sum_x * sum_y);
+            var step2 = (shortestArrayLength * sum_x2) - (sum_x * sum_x);
+            var step3 = (shortestArrayLength * sum_y2) - (sum_y * sum_y);
+            var step4 = Math.sqrt(step2 * step3);
+            var answer = ((step1 / step4).toFixed(2));
+
+            return answer;
+        }
+
+        for (var i = 0; i < jsonData.length; i+=data_range) { // 
+            var temp_sum = 0;
+            var humi_sum = 0;
+            
+            for (var j = i; j < i+data_range; j++) { // 0~9, 10~19, 20~29
+                temp_sum += parseFloat(temp[j]);
+                humi_sum += parseFloat(humi[j]);
+                temp_c.push((parseFloat(temp[j]))+(parseFloat((Math.random()/1000).toFixed(7)))); // 0~10, 11~21, 22~32, 33~43
+                humi_c.push(parseFloat(humi[j]));
+            }
+            temp_avg.push(String(temp_sum/data_range));
+            humi_avg.push(String(humi_sum/data_range));
+
+            date_avg.push(date[i]); // 0, 10, 20, 30, 40, 50
+
+            correlation.push(getPearsonCorrelation(temp_c, humi_c));
+
+            temp_c.splice(0, data_range);
+            humi_c.splice(0, data_range);
+        }
+
+        var traces = [
+            {
+            type: "scatter",
+            mode: "lines",
+            name: 'Humidity',
+            x: date_avg,
+            y: humi_avg,
+            yaxis : "y4",
+            line: {
+                color: '#3412fc'
+                }
+            },
+            {
+            type: "scatter",
+            mode: "lines",
+            name: 'Temperature',
+            x: date_avg,
+            y: temp_avg,
+            yaxis : "y3",
+            line: {
+                color: '#fc1234'
+                }     
+            },
+            {
+            type: "scatter",
+            mode: "lines",
+            name: 'Correlation',
+            x: date_avg,
+            y: correlation,
+            yaxis : "y2",
+            line: {
+                color: '#34fc12'
+                }
+            },
+            {
+            type: "scatter",
+            mode: "markers",
+            name: 'Cr',
+            x: cr_date,
+            y: cr,
+            yaxis : "y",
+            line: {
+                color: '#895400'
+            }
+        }];
+
+      var layout = {
+            title: 'Temp vs. Humi vs. Correlation with rangeslider with cr',
+            xaxis: {
+                autorange: true,
+                range: [date_avg[0], date_avg[date_avg.length - 1]],
+                rangeselector: {
+                    buttons: [{
+                            count: 30,
+                            label: '30 min',
+                            step: 'minute',
+                            stepmode: 'backward'
+                            },
+                        {
+                            count: 1,
+                            label: '1 hour',
+                            step: 'hour',
+                            stepmode: 'backward'
+                            },
+                        {
+                            count: 5,
+                            label: '5 hour',
+                            step: 'hour',
+                            stepmode: 'backward'
+                            },
+                        {
+                            step: 'all'
+                            }
+                        ]
+                },
+                rangeslider: {
+                    range: [date_avg[0], date_avg[date_avg.length - 1]]
+                },
+                type: 'date'
+            },
+            yaxis: {
+                autorange: true,
+                range: [1, 5],
+                type: 'linear',
+                domain:[0, .2]
+            },
+            yaxis2: {
+                autorange: true,
+                range: [-1, 1],
+                type: 'linear',
+                domain:[.25, .45]
+            },
+            yaxis3: {
+                autorange: true,
+                range: [0, 100],
+                type: 'linear',
+                domain:[.50, .70]
+            },
+            yaxis4: {
+                autorange: true,
+                range: [0, 100],
+                type: 'linear',
+                domain:[.75, 1]
+            }
+        };
+
+        Plotly.newPlot('myDiv', traces, layout);
+    });
+		</script>
+
+	</body>
+</html>	
+
