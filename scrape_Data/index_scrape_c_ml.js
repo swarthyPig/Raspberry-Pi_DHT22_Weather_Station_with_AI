@@ -135,28 +135,32 @@ function getPearsonCorrelation(x, y) {
 }
 
 function get_tensorflow(Celsius,Humidity){
-        tensorflow_cr = ((0.07446165) * Celsius) + (0.11316531 * Humidity) + (-2.8271704);
+        // CR = W[0]*T + W[1]*H + b
+        tensorflow_cr = ((-0.01197178) * Celsius) + (0.07874079 * Humidity) + (0.88708663);
 
     return tensorflow_cr + "";
 }
 
 function get_sklearn(Celsius,Humidity){
+        // CR = W[0]*T + W[1]*H + b
         var sklearn_list = []
 
-        sklearn_list[0] = ((-0.09939661) * Celsius) + ((-0.25826953) * Humidity) + (12.35153308);
-        sklearn_list[1] = ((-0.01450908) * Celsius) + ((-0.30808969) * Humidity) + (12.12950693);
-        sklearn_list[2] = ((-0.13974128) * Celsius) + ((0.01788321) * Humidity) + (2.7670086);
-        sklearn_list[3] = ((0.11125783) * Celsius) + ((0.27725472) * Humidity) + (-13.42706412);
-        sklearn_list[4] = ((0.14238915) * Celsius) + ((0.27122129) * Humidity) + (-13.8209845);
+        sklearn_list[0] = ((0.05433158) * Celsius) + ((-0.33210656) * Humidity) + (11.38983241);
+        sklearn_list[1] = ((-0.00099514) * Celsius) + ((-0.31913304) * Humidity) + (12.23917661);
+        sklearn_list[2] = ((-0.13088872) * Celsius) + ((0.09182024) * Humidity) + (-0.56336028);
+        sklearn_list[3] = ((0.09185596) * Celsius) + ((0.30131096) * Humidity) + (-13.89248903);
+        sklearn_list[4] = ((-0.01430367) * Celsius) + ((0.2581084) * Humidity) + (-9.17315971);
 
-        var max = Math.max.apply(null, sklearn_list);
-        var sklearn_cr = (sklearn_list.indexOf(max))+1;
+        var max = Math.max.apply(null, sklearn_list); // The largest value of the elements in the array.
+        var sklearn_cr = (sklearn_list.indexOf(max))+1; // index of array
 
     return sklearn_cr + "";
 }
 
 function get_keras(Celsius,Humidity){
-        keras_cr = ((0.04672196) * Celsius) + (0.10079119 * Humidity) + (-1.5019808);
+        // CR = W[0]*T + W[1]*H + b
+        
+        keras_cr = ((0.00299918) * Celsius) + (0.08155352 * Humidity) + (0.25672072);
     
     return keras_cr + "";
 }
