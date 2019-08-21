@@ -51,8 +51,12 @@
   * scrape_Data
     - 동적 웹페이지로부터 온,습도를 scraping 하여 데이터를 mongodb에 저장하고 correlation을 계산하여 socket으로 전송해주었습니다.
     
+  * machine learning folder
+    - 프로젝트에서 사용한 머신러닝 모델과 데이터파일입니다. 각각 tensorflow, sk-learn, keras를 사용하여 모델을 제작하였습니다.
+    
   * Raspberry Pi setting & install.txt
     - 라즈베리파이에 대한 초기설정과 각종 언어 및 기술의 설치 방법등이 적혀있습니다.
+    
     
   ## 참고 이미지 
   
