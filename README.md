@@ -21,6 +21,9 @@
   * flask(5000), socket.io(3000), express(3030) 총 3개의 서버를 사용하였고 동시에 running됩니다.
   * 데이터를 주고받기위해 CORS 설정을 해주어 문제없이 작동 되게 하였습니다.
   
+## 프로젝트 맵
+  ![map](/img/map.png)
+  
 ## 사용한 도구, 언어 및 기술
   * Editor
     - VScode, Google Colab
