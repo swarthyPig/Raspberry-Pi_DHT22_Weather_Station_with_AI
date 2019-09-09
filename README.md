@@ -22,7 +22,7 @@
   * 데이터를 주고받기위해 CORS 설정을 해주어 문제없이 작동 되게 하였습니다.
   
 ## 프로젝트 맵
-  ![map](/img/map.png)
+  ![map](/img/map.PNG)
   
 ## 사용한 도구, 언어 및 기술
   * Editor
@@ -62,7 +62,7 @@
     - 라즈베리파이에 대한 초기설정과 각종 언어 및 기술의 설치 방법등이 적혀있습니다.
     
     
-  ## 참고 이미지 
+## 참고 이미지 
   
    ![correlation](/img/correlation_relation.png)
     
