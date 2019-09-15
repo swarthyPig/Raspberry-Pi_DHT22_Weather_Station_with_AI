@@ -61,6 +61,11 @@
   * Raspberry Pi setting & install.txt
     - 라즈베리파이에 대한 초기설정과 각종 언어 및 기술의 설치 방법등이 적혀있습니다.
     
+## 최종 결과 화면
+
+   ![client](/img/client_DB_c_cr.PNG)
+   ![plotly](/img/plotly_ml.PNG)
+    
 ## 참고 파일
    프로젝트 발표용 PPT에서 각종 화면(실행,콘솔)과 코드를 볼 수 있습니다.
    
