@@ -76,7 +76,7 @@
 
    ![client](/img/client_DB_c_cr.PNG)
    ----------------------------------------------------------
-   ![plotly](/img/plotly_ml.PNG)
+   ![plotly](/img/plotly_ML.PNG)
     
 ## 참고 파일
    프로젝트 발표용 PPT에서 각종 화면(실행,콘솔)과 코드를 볼 수 있습니다.
