@@ -52,7 +52,7 @@
     - MongoDB
   
 ## 각 폴더별 간단한 설명
-  * [data mining folder](/data_mining)
+  * [data mining folder](/data-mining)
      - python 라이브러리인 pandas를 사용하여 데이터를 분석하였습니다.
     
   * express folder
