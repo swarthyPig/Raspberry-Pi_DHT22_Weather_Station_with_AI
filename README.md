@@ -55,21 +55,21 @@
   * [data mining folder](/data%20mining)
      - python 라이브러리인 pandas를 사용하여 데이터를 분석하였습니다.
     
-  * express folder
+  * [express folder](/express)
     - express-generator를 사용하여 진행하였습니다.
     - Pearson correlation를 사용하여 온,습도의 상관관계를 분석하였습니다.
     
-  * flask folder
+  * [flask folder](/flask)
     - 라즈베리파이의 GPIO핀과 파이썬을 이용하여 DHT22센서 데이터를 받았습니다.
     - 파이썬의 Flask를 사용하여 동적 html웹 페이지(2초마다 데이터 갱신)를 생성하였습니다.
   
-  * scrape_Data
+  * [scrape_Data](/scrape_Data)
     - 동적 웹페이지로부터 온,습도를 scraping 하여 데이터를 mongodb에 저장하고 correlation을 계산하여 socket으로 전송해주었습니다.
     
-  * machine learning folder
+  * [machine learning folder](/machine%20learning)
     - 프로젝트에서 사용한 머신러닝 모델과 데이터파일입니다. 각각 tensorflow, sk-learn, keras를 사용하여 모델을 제작하였습니다.
     
-  * Raspberry Pi setting & install.txt
+  * [Raspberry Pi setting & install.txt](/Raspberry%20Pi%20setting%20%26%20install.txt)
     - 라즈베리파이에 대한 초기설정과 각종 언어 및 기술의 설치 방법등이 적혀있습니다.
     
 ## 최종 결과 화면
